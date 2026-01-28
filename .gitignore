@@ -46,6 +46,7 @@ htmlcov/
 reports/
 *.html
 !templates/*.html
+!docs/*.html
 complexity_reports/
 test_verify/
 test_reports/
