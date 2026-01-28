@@ -72,6 +72,10 @@ jobs:
         run: |
           complexity-tracker --config config.yaml
       
+      - name: Copy index.html to output directory
+        run: |
+          cp docs/index.html complexity_reports/index.html
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
