@@ -6,6 +6,8 @@ A comprehensive tool for analyzing and tracking code complexity across multiple 
 - **Dependency Complexity**: Number and distribution of dependencies across different package managers
 - **Documentation Tokens**: Amount of documentation in repositories
 
+📊 **[View Live Report on GitHub Pages](https://datagriff.github.io/complexity.tracker/)** - See the complexity analysis for this repository!
+
 ## Features
 
 - 🔍 **Multi-Repository Analysis**: Analyze specific repositories, entire organizations, or custom lists
@@ -232,6 +234,39 @@ Options:
 - **Code Quality Monitoring**: Regular tracking of complexity trends
 - **Dependency Management**: Identify repositories with excessive dependencies
 - **Documentation Coverage**: Assess documentation across projects
+
+## GitHub Pages Deployment
+
+This repository automatically deploys complexity reports to GitHub Pages on every push to the `main` branch.
+
+### Automatic Deployment
+
+The GitHub Actions workflow (`.github/workflows/deploy-pages.yml`) automatically:
+1. Analyzes the repository using the complexity tracker
+2. Generates HTML reports with visualizations
+3. Deploys the reports to GitHub Pages
+
+The live report is available at: https://datagriff.github.io/complexity.tracker/
+
+### Manual Deployment
+
+You can also trigger the deployment manually:
+1. Go to the "Actions" tab in GitHub
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
+
+### Setting Up GitHub Pages for Your Repository
+
+To deploy complexity reports for your own repository:
+
+1. Copy the `.github/workflows/deploy-pages.yml` file to your repository
+2. Update the `config.yaml` section in the workflow to analyze your desired repositories
+3. Enable GitHub Pages in your repository settings:
+   - Go to Settings > Pages
+   - Set Source to "GitHub Actions"
+4. Push to the `main` branch or manually trigger the workflow
+
+The reports will be available at `https://<username>.github.io/<repository>/`
 
 ## Requirements
 

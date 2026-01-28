@@ -1,0 +1,93 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+      
+      - name: Create config file
+        run: |
+          cat > config.yaml << EOF
+          repositories:
+            type: list
+            repos:
+              - dataGriff/complexity.tracker
+          
+          analysis:
+            code_complexity: true
+            dependency_complexity: true
+            documentation_tokens: true
+            
+            exclude_patterns:
+              - "*/test/*"
+              - "*/tests/*"
+              - "*/node_modules/*"
+              - "*/vendor/*"
+              - "*/.git/*"
+              - "*/dist/*"
+              - "*/build/*"
+          
+          output:
+            directory: complexity_reports
+            format:
+              - html
+              - json
+            charts: true
+          
+          clone_directory: repos
+          EOF
+      
+      - name: Generate complexity report
+        run: |
+          complexity-tracker --config config.yaml
+      
+      - name: Copy index.html to output directory
+        run: |
+          cp docs/index.html complexity_reports/index.html
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./complexity_reports
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
