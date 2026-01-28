@@ -1,0 +1,57 @@
+[
+  {
+    "repository": "Hello-World",
+    "path": "repos/Hello-World",
+    "timestamp": "2026-01-28T20:45:17.536302",
+    "analyses": {
+      "code_complexity": {
+        "total_files": 0,
+        "total_functions": 0,
+        "total_lines_of_code": 0,
+        "total_complexity": 0,
+        "average_complexity": 0,
+        "max_complexity": 0,
+        "high_complexity_functions": [],
+        "complexity_by_language": {},
+        "files_analyzed": []
+      },
+      "dependency_complexity": {
+        "total_dependencies": 0,
+        "total_dependency_files": 0,
+        "dependencies_by_manager": {},
+        "dependency_files": []
+      },
+      "documentation_tokens": {
+        "total_doc_files": 1,
+        "total_tokens": 2,
+        "total_characters": 13,
+        "total_lines": 2,
+        "average_tokens_per_file": 2.0,
+        "doc_files_by_type": {
+          "": {
+            "files": 1,
+            "tokens": 2
+          }
+        },
+        "largest_doc_files": [
+          {
+            "path": "README",
+            "tokens": 2,
+            "characters": 13,
+            "lines": 2,
+            "type": ""
+          }
+        ],
+        "documentation_files": [
+          {
+            "path": "README",
+            "tokens": 2,
+            "characters": 13,
+            "lines": 2,
+            "type": ""
+          }
+        ]
+      }
+    }
+  }
+]

@@ -63,17 +63,24 @@ class RepositoryManager:
         api_url = f"https://api.github.com/orgs/{org_name}/repos"
         headers = {}
         if self.github_token:
-            headers['Authorization'] = f"token {self.github_token}"
+            headers['Authorization'] = f"Bearer {self.github_token}"
         
         page = 1
         per_page = 100
         
         while True:
             params = {'page': page, 'per_page': per_page}
-            response = requests.get(api_url, headers=headers, params=params)
+            response = requests.get(api_url, headers=headers, params=params, timeout=30)
             
             if response.status_code != 200:
-                raise Exception(f"Failed to fetch repositories for organization {org_name}: {response.status_code}")
+                error_msg = f"Failed to fetch repositories for organization {org_name}: HTTP {response.status_code}"
+                if response.status_code == 401:
+                    error_msg += " - Authentication failed. Check your GitHub token."
+                elif response.status_code == 403:
+                    error_msg += " - Rate limit exceeded or insufficient permissions."
+                elif response.status_code == 404:
+                    error_msg += " - Organization not found."
+                raise Exception(error_msg)
             
             repos = response.json()
             if not repos:

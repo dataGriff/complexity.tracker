@@ -33,8 +33,10 @@ class CodeComplexityAnalyzer(BaseAnalyzer):
         """
         relative_path = str(file_path.relative_to(repo_path))
         for pattern in self.exclude_patterns:
-            pattern = pattern.replace('*/', '')
-            if pattern in relative_path:
+            # Remove wildcards and normalize pattern
+            clean_pattern = pattern.replace('*/', '').replace('/*', '')
+            # Check if pattern matches as a path component
+            if f"/{clean_pattern}/" in f"/{relative_path}/" or relative_path.startswith(clean_pattern):
                 return True
         return False
     

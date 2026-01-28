@@ -54,10 +54,10 @@ class DocumentationTokenAnalyzer(BaseAnalyzer):
                     file_path = Path(root) / file
                     ext = file_path.suffix.lower()
                     
-                    # Include README files and files in doc directories or with doc extensions
+                    # Include README files and files with doc extensions, or files in doc directories with text extensions
                     if (ext in self.DOC_EXTENSIONS or 
                         file.upper().startswith('README') or 
-                        is_doc_dir):
+                        (is_doc_dir and ext in self.DOC_EXTENSIONS)):
                         
                         try:
                             content = file_path.read_text(encoding='utf-8', errors='ignore')

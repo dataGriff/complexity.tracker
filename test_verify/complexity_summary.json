@@ -1,0 +1,23 @@
+{
+  "total_repositories": 1,
+  "timestamp": "2026-01-28T20:45:17.538949",
+  "aggregated_metrics": {
+    "code_complexity": {
+      "total_files": 0,
+      "total_functions": 0,
+      "total_complexity": 0,
+      "total_lines_of_code": 0,
+      "max_complexity": 0
+    },
+    "dependency_complexity": {
+      "total_dependencies": 0,
+      "total_dependency_files": 0
+    },
+    "documentation_tokens": {
+      "total_doc_files": 1,
+      "total_tokens": 2,
+      "total_characters": 13,
+      "total_lines": 2
+    }
+  }
+}

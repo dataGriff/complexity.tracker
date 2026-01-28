@@ -129,8 +129,8 @@ class DependencyComplexityAnalyzer(BaseAnalyzer):
             # Line-based files (requirements.txt, go.mod, etc.)
             elif file_path.name in ['requirements.txt', 'Pipfile']:
                 lines = [line.strip() for line in content.split('\n')]
-                # Count non-empty, non-comment lines
-                return len([line for line in lines if line and not line.startswith('#') and not line.startswith('[') and '==' in line or '>=' in line or '~=' in line])
+                # Count non-empty, non-comment lines with version specifiers
+                return len([line for line in lines if line and not line.startswith('#') and not line.startswith('[') and ('==' in line or '>=' in line or '~=' in line)])
             
             # Lock files (approximate count from content)
             elif 'lock' in file_path.name.lower():
@@ -192,7 +192,7 @@ class DependencyComplexityAnalyzer(BaseAnalyzer):
                 # Count dependency-like entries
                 return len([line for line in lines if ':' in line and not line.startswith('#') and 'dependencies' not in line])
         
-        except Exception:
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
             return 0
         
         return 0

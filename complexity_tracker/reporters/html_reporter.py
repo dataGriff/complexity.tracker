@@ -143,10 +143,9 @@ class HtmlReporter(BaseReporter):
 <body>
     <div class="container">
         <h1>📊 Complexity Tracker Report</h1>
-        <p class="timestamp">Generated: {timestamp}</p>
 """
         
-        html += f"<p class=\"timestamp\">{summary.get('timestamp', datetime.now().isoformat())}</p>\n"
+        html += f"        <p class=\"timestamp\">Generated: {summary.get('timestamp', datetime.now().isoformat())}</p>\n"
         
         # Summary section
         html += """
