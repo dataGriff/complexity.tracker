@@ -47,6 +47,8 @@ reports/
 *.html
 !templates/*.html
 complexity_reports/
+test_verify/
+test_reports/
 
 # Cloned repositories
 repos/
