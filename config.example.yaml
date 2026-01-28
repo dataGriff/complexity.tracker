@@ -1,0 +1,56 @@
+# Example Configuration for Complexity Tracker
+
+# Repository configuration
+repositories:
+  # Type of repository source: 'list', 'organization', or 'all'
+  type: list
+  
+  # List of specific repositories (when type is 'list')
+  # Format: owner/repo or full GitHub URL
+  repos:
+    - octocat/Hello-World
+    - github/gitignore
+  
+  # Organization configuration (when type is 'organization')
+  # organization: my-org
+  # max_repos: 10  # Optional: limit number of repositories
+  
+# GitHub API configuration
+github:
+  # Optional: GitHub personal access token for API access
+  # Required for private repositories and higher rate limits
+  token: null
+  api_url: https://api.github.com
+
+# Analysis configuration
+analysis:
+  # Enable/disable specific analyzers
+  code_complexity: true
+  dependency_complexity: true
+  documentation_tokens: true
+  
+  # Patterns to exclude from analysis
+  exclude_patterns:
+    - "*/test/*"
+    - "*/tests/*"
+    - "*/node_modules/*"
+    - "*/vendor/*"
+    - "*/.git/*"
+    - "*/dist/*"
+    - "*/build/*"
+
+# Output configuration
+output:
+  # Directory to save reports
+  directory: complexity_reports
+  
+  # Output formats: html, json, or both
+  format:
+    - html
+    - json
+  
+  # Generate charts
+  charts: true
+
+# Directory to clone repositories into
+clone_directory: repos
